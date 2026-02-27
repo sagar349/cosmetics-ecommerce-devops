@@ -26,4 +26,20 @@ To design, containerize, and deploy a scalable e-commerce application using mode
 
 ---
 
-More details will be added as the project evolves.
+# Cosmetics E-Commerce DevOps Project
+
+A production-style microservices-based e-commerce platform demonstrating real-world DevOps practices.
+
+## 🎯 Goal
+
+Build, containerize, and structure a scalable cosmetics e-commerce application with multiple microservices.
+
+## 🏗 Microservices
+
+| Service Name      | Port | Description                        |
+|------------------|------|------------------------------------|
+| Product Service   | 5000 | Manages product catalog            |
+| Cart Service      | 5001 | Manages user carts (add/remove)   |
+| User Service      | 5002 | Manages users (register/list)     |
+
+## 🚀 Project Structure
