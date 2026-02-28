@@ -2,19 +2,21 @@ pipeline {
     agent any
 
     environment {
-        DOCKERHUB_CREDENTIALS = credentials('dockerhub-creds') // Replace with your Jenkins secret ID
+        DOCKERHUB_CREDENTIALS = credentials('dockerhub-creds') // Jenkins secret ID
         DOCKERHUB_USER = "${DOCKERHUB_CREDENTIALS_USR}"
         DOCKERHUB_PASS = "${DOCKERHUB_CREDENTIALS_PSW}"
+        KUBECONFIG = credentials('kubeconfig') // Jenkins secret containing kubeconfig
     }
 
     stages {
+
         stage('Checkout') {
             steps {
                 git branch: 'main', url: 'https://github.com/yourusername/cosmetics-ecommerce-devops.git'
             }
         }
 
-        stage('Install Dependencies & Test') {
+        stage('Install & Test') {
             matrix {
                 axes {
                     axis {
@@ -23,14 +25,14 @@ pipeline {
                     }
                 }
                 stages {
-                    stage('Install') {
+                    stage('Install Dependencies') {
                         steps {
                             dir("app/${SERVICE}") {
                                 sh 'npm install'
                             }
                         }
                     }
-                    stage('Test') {
+                    stage('Run Tests') {
                         steps {
                             dir("app/${SERVICE}") {
                                 sh 'echo "No tests yet for ${SERVICE}"'
@@ -50,7 +52,7 @@ pipeline {
                     }
                 }
                 stages {
-                    stage('Build') {
+                    stage('Build Docker Image') {
                         steps {
                             dir("app/${SERVICE}") {
                                 sh """
@@ -64,11 +66,20 @@ pipeline {
                 }
             }
         }
+
+        stage('Deploy to Kubernetes') {
+            steps {
+                withCredentials([file(credentialsId: 'kubeconfig', variable: 'KUBECONFIG_FILE')]) {
+                    sh 'export KUBECONFIG=$KUBECONFIG_FILE'
+                    sh 'kubectl apply -f k8s/'
+                }
+            }
+        }
     }
 
     post {
         always {
-            echo "Pipeline finished for all services."
+            echo "Pipeline finished for all microservices."
         }
     }
 }
