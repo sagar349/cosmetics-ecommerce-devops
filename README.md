@@ -43,3 +43,39 @@ Build, containerize, and structure a scalable cosmetics e-commerce application w
 | User Service      | 5002 | Manages users (register/list)     |
 
 ## 🚀 Project Structure
+app/
+ ├─ product-service/
+ │    ├─ index.js
+ │    ├─ package.json
+ │    ├─ .env
+ │    ├─ Dockerfile
+ │    └─ README.md
+ ├─ cart-service/
+ │    ├─ index.js
+ │    ├─ package.json
+ │    ├─ .env
+ │    ├─ Dockerfile
+ │    └─ README.md
+ └─ user-service/
+      ├─ index.js
+      ├─ package.json
+      ├─ .env
+      ├─ Dockerfile
+      └─ README.md
+
+docker/                    # Optional shared Docker scripts
+terraform/                 # Terraform IaC files
+docs/                      # Documentation (optional)
+.github/workflows/         # GitHub Actions CI/CD pipelines
+k8s/                       # Kubernetes manifests for all services
+
+## 📌 Features
+
+- Microservices architecture (Node.js REST APIs)
+- Environment-based configuration (.env)
+- Service-specific Dockerfiles
+- Kubernetes manifests ready for deployment
+- Terraform infrastructure examples (EC2, Jenkins, EKS)
+- CI/CD workflows using GitHub Actions
+- ArgoCD (optional) for GitOps-style deployments
+- Jenkins (optional) for CI/CD pipelines
