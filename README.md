@@ -71,11 +71,27 @@ k8s/                       # Kubernetes manifests for all services
 
 ## 📌 Features
 
-- Microservices architecture (Node.js REST APIs)
-- Environment-based configuration (.env)
-- Service-specific Dockerfiles
-- Kubernetes manifests ready for deployment
-- Terraform infrastructure examples (EC2, Jenkins, EKS)
-- CI/CD workflows using GitHub Actions
-- ArgoCD (optional) for GitOps-style deployments
-- Jenkins (optional) for CI/CD pipelines
+- Microservices architecture (Node.js REST APIs)  
+- Environment-based configuration (`.env`)  
+- Service-specific Dockerfiles  
+- Kubernetes manifests ready for deployment  
+- Terraform infrastructure examples (EC2, Jenkins, EKS)  
+- CI/CD pipelines using GitHub Actions and Jenkins  
+- GitOps via ArgoCD for automated deployment  
+- End-to-end DevOps lifecycle demonstrated 
+
+## ⚡ CI/CD Pipeline
+
+- **GitHub Actions Workflow**:
+  - Installs dependencies, runs tests (placeholder), builds Docker images, and pushes to DockerHub.  
+- **Jenkins Pipeline**:
+  - Declarative pipeline building all 3 microservices, pushing Docker images, and deploying to Kubernetes.  
+- **Deployment Stage**:
+  - Applies all Kubernetes manifests in `k8s/` folder.  
+  - Fully automated continuous deployment ready for recruiters to see.
+
+  ## 🔄 GitOps / ArgoCD
+
+- Kubernetes manifests for all services are in `k8s/`  
+- ArgoCD apps in `argocd/` watch this repo and deploy automatically  
+- Demonstrates automated GitOps-style deployment  
